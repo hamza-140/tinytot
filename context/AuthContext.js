@@ -39,7 +39,7 @@ const signup =
         password,
       );
       const token = response.user.uid;
-      // await AsyncStorage.setItem('token', token);
+      // await .setItem('token', token);
       // await SecureKeyStore.set('token', token);
       await Keychain.setGenericPassword('token', token);
       dispatch({type: SIGNUP, payload: token});
