@@ -48,7 +48,7 @@ const signup =
       console.error(err);
       dispatch({
         type: ADD_ERROR,
-        payload: 'Something went wrong. ',
+        payload: 'Something went wrong.',
       });
     }
   };
