@@ -1,6 +1,7 @@
 # # Hardcoded example values
-# T_input = "4,4,2,4"
-# S_input = "5,5,2,5"
+# T_input = "2, 1, 3, 4"
+# S_input = "3, 2, 5, 6"
+
 
 # # Splitting the input strings into lists of integers
 # T = [int(val) for val in T_input.split(',')]
@@ -23,3 +24,4 @@
 
 
 # print(countBuses)
+
