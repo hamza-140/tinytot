@@ -1,8 +1,6 @@
-
 import json
-
 person_dict = {'name': 'Bob',
 'age': 12,
-'children': None
+'children': None 
 }
 person_json = json.dumps(person_dict)
