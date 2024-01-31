@@ -42,7 +42,32 @@ class Board:
         self.pieces = []
 
     def update_valid_moves(self):
-        pass
+        for piece in self.pieces:
+            piece.valid_moves = []
+            # Update the valid moves for the piece
+
+    def move_piece(self, piece, x, y ):
+        # Add a newline after the opening parenthesis
+        piece.move(x, y)
+        self.pieces.remove(piece)
+        self.pieces.append(piece)
+        self.update_valid_moves()
+
+    def is_valid_move(self, piece, x, y):
+        # Check if the move is valid for the piece
+        return True or False
+
+    def is_checkmate(self):
+        # Check if the current player is in checkmate
+        return True or False
+
+    def is_stalemate(self):
+        # Check if the current player is in stalemate
+        return True or False
+
+    def game_over(self):
+        # Check if the game is over
+        return self.is_checkmate() or self.is_stalemate()
 
 def draw_board(screen):
     for i in range(8):
@@ -58,7 +83,7 @@ def draw_pieces(screen, pieces):
         text_surface = font.render(text, True, (255, 255, 255))
         screen.blit(text_surface, (x * SIZE + SIZE // 2 - text_surface.get_width() // 2, y * SIZE + SIZE // 2 - text_surface.get_height() // 2))
 
-def handle_input(piece, pieces, selected_piece):
+def handle_input(pieces, selected_piece, current_player):
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
@@ -71,12 +96,12 @@ def handle_input(piece, pieces, selected_piece):
                     if piece.position == (col, row) and piece.color == current_player:
                         selected_piece = piece
             else:
-                if (col, row) in piece.valid_moves:
-                    piece.move(col, row)
+                if (col, row) in selected_piece.valid_moves:
+                    selected_piece.move(col, row)
                     selected_piece = None
                     current_player = "b" if current_player == "w" else "w"
 
-    return pieces, selected_piece
+    return board.pieces, selected_piece, current_player
 
 def update_display(screen, pieces, selected_piece):
     screen.fill((0, 0, 0))
@@ -122,7 +147,13 @@ current_player = "w"
 selected_piece = None
 
 # Run the game loop
+# Create a Board object and add the pieces to it
+board = Board()
+board.pieces = pieces
+
+# Run the game loop
 while True:
     clock.tick(60)
-    pieces, selected_piece = handle_input(selected_piece, pieces, current_player)
+    pieces, selected_piece, current_player = handle_input(pieces, selected_piece, current_player)
+    board.update_valid_moves()  # Update the valid moves for all pieces
     update_display(screen, pieces, selected_piece)
