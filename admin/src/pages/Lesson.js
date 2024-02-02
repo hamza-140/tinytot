@@ -196,7 +196,7 @@ const Lesson = () => {
   return (
     <div>
       <p>{isSpeaking ? 'Speaking...' : 'Tap to speak'}</p>
-      <button onClick={() => speakText('Hello, world!')} disabled={isSpeaking}>
+      <button onClick={() => speakText('Hello!')} disabled={isSpeaking}>
         Speak Text
       </button>
       <button onClick={stopSpeaking} disabled={!isSpeaking}>
