@@ -27,6 +27,7 @@
     "react-native-secure-key-store": "^2.0.10",
     "react-native-sound": "^0.11.2",
     "react-native-svg": "^14.1.0",
+    "react-native-tts": "^4.1.0",
     "react-native-webview": "^13.6.4",
     "react-native-youtube-iframe": "^2.3.0",
     "rn-perfect-sketch-canvas": "^0.3.0"
