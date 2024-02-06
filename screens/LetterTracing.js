@@ -7,7 +7,7 @@ import Tts from 'react-native-tts';
 const LetterTracing = () => {
   const {signout} = useContext(Context);
   const tts = () => {
-    Tts.speak('Hello!', {
+    Tts.speak('Hello Me!', {
       androidParams: {
         KEY_PARAM_PAN: -1,
         KEY_PARAM_VOLUME: 0.5,
