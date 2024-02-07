@@ -15,6 +15,7 @@ import Tracing from './screens/English/Tracing';
 import {setNavigator} from './ref/navigationRef';
 import Login from './screens/Login/Login';
 import Checker from './screens/Checker';
+import TestScreen from './TestScreen';
 const Stack = createNativeStackNavigator();
 
 const App = () => {
@@ -23,8 +24,9 @@ const App = () => {
       <NavigationContainer ref={navigator => setNavigator(navigator)}>
         <StatusBar hidden={true} />
         <Stack.Navigator
-          initialRouteName="Checker"
+          initialRouteName="Test"
           screenOptions={{headerShown: false}}>
+          <Stack.Screen name="Test" component={TestScreen} />
           <Stack.Screen name="Checker" component={Checker} />
           <Stack.Screen name="Tracing" component={Tracing} />
           <Stack.Screen name="Login" component={Login} />
