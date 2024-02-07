@@ -14,7 +14,7 @@ const KidProfileScreen = ({navigation, route}) => {
         kidInfo: {name, age},
       });
       console.log('Kid information saved!');
-      props.navigation.goBack();
+      navigation.navigate('Main');
     } catch (error) {
       console.error('Error updating document: ', error);
     }

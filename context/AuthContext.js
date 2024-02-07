@@ -68,7 +68,7 @@ const signup =
             .doc(user.uid)
             .set({name, email, password, kidInfo: {}})
             .then(() => {
-              props.navigation.navigate('KidProfile', {parentId: user.uid});
+              navigate('KidProfile', {parentId: user.uid});
             })
             .catch(error => {
               console.error('Error adding document: ', error);
