@@ -1,5 +1,5 @@
 import React, {useContext, useEffect, useState} from 'react';
-import {View, StyleSheet} from 'react-native';
+import {View, StyleSheet, TouchableOpacity, Text} from 'react-native';
 import {Input, Button} from 'react-native-elements';
 import * as Animatable from 'react-native-animatable';
 import {Context} from '../../context/AuthContext';
@@ -67,6 +67,29 @@ const Login = ({navigation}) => {
           buttonStyle={styles.button}
           onPress={handleLogin}
         />
+      </Animatable.View>
+      <Animatable.View animation="fadeInUp" style={styles.inputContainer}>
+        <View style={{flexDirection: 'row'}}>
+          <TouchableOpacity>
+            <Text style={{color: 'white', fontWeight: 'bold'}}>
+              No Account?{}
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={{marginLeft: 10}}
+            onPress={() => {
+              navigation.navigate('Signup');
+            }}>
+            <Text
+              style={{
+                color: 'white',
+                fontWeight: 'bold',
+                textDecorationLine: 'underline',
+              }}>
+              Register Here!
+            </Text>
+          </TouchableOpacity>
+        </View>
       </Animatable.View>
     </View>
   );

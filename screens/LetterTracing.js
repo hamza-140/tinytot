@@ -20,7 +20,7 @@ const LetterTracing = () => {
       <Text style={{color: 'black'}}>Hekko</Text>
       <Text>Account Screen</Text>
 
-      <Button title="Sign Out" onPress={tts}></Button>
+      <Button title="Sign Out" onPress={signout}></Button>
     </View>
   );
 };
