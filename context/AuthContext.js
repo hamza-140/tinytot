@@ -4,7 +4,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import {navigate} from '../ref/navigationRef';
 import RNSecureKeyStore, {ACCESSIBLE} from 'react-native-secure-key-store';
 import * as Keychain from 'react-native-keychain';
-
+import {firebase} from '@react-native-firebase/firestore';
 // Define action types
 const ADD_ERROR = 'add_error';
 const SIGNUP = 'signup';
@@ -30,20 +30,53 @@ const clearErrorMessage = dispatch => () => {
   dispatch({type: CLEAR});
 };
 
+// const signup =
+//   dispatch =>
+//   async ({email, password}) => {
+//     try {
+//       const response = await auth().createUserWithEmailAndPassword(
+//         email,
+//         password,
+//       );
+//       const token = response.user.uid;
+//       // await .setItem('token', token);
+//       // await SecureKeyStore.set('token', token);
+//       await Keychain.setGenericPassword('token', token);
+//       dispatch({type: SIGNUP, payload: token});
+//       navigate('KidProfile');
+//     }
+// catch (err) {
+//       console.error(err);
+//       dispatch({
+//         type: ADD_ERROR,
+//         payload: 'Something went wrong!',
+//       });
+//     }
+//   };
+
 const signup =
   dispatch =>
-  async ({email, password}) => {
+  async ({name, email, password}) => {
     try {
-      const response = await auth().createUserWithEmailAndPassword(
-        email,
-        password,
-      );
-      const token = response.user.uid;
-      // await .setItem('token', token);
-      // await SecureKeyStore.set('token', token);
-      await Keychain.setGenericPassword('token', token);
-      dispatch({type: SIGNUP, payload: token});
-      navigate('Main');
+      firebase
+        .auth()
+        .createUserWithEmailAndPassword(email, password)
+        .then(userCredential => {
+          const user = userCredential.user;
+          const db = firebase.firestore();
+          db.collection('parents')
+            .doc(user.uid)
+            .set({name, email, password, kidInfo: {}})
+            .then(() => {
+              props.navigation.navigate('KidProfile', {parentId: user.uid});
+            })
+            .catch(error => {
+              console.error('Error adding document: ', error);
+            });
+        })
+        .catch(error => {
+          console.error(error);
+        });
     } catch (err) {
       console.error(err);
       dispatch({

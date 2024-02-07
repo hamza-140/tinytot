@@ -2,16 +2,6 @@
   "name": "tinytot1",
   "version": "0.0.1",
   "private": true,
-  "type": "module",
-  "jest": {
-    "preset": "react-native",
-    "transformIgnorePatterns": [
-      "node_modules/(?!(jest-)?react-native|@react-native-firebase|@react-navigation)"
-    ],
-    "setupFiles": [
-      "./node_modules/react-native-gesture-handler/jestSetup.js"
-    ]
-  },
   "scripts": {
     "android": "react-native run-android",
     "ios": "react-native run-ios",

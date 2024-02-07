@@ -1,11 +1,24 @@
 import firestore from '@react-native-firebase/firestore';
-
 import React, {useState} from 'react';
 import {View, StyleSheet, Text, TouchableOpacity, Image} from 'react-native';
 import {Input, Button} from 'react-native-elements';
 import auth from '@react-native-firebase/auth';
 
 const KidProfileScreen = ({navigation, route}) => {
+  const {parentId} = route.params;
+  const [name, setName] = useState('');
+  const [age, setAge] = useState('');
+  const handleSave = async () => {
+    try {
+      await firestore().collection('parents').doc(parentId).update({
+        kidInfo: {name, age},
+      });
+      console.log('Kid information saved!');
+      props.navigation.goBack();
+    } catch (error) {
+      console.error('Error updating document: ', error);
+    }
+  };
   const addKidProfile = async () => {
     try {
       // Reference to the "kidProfiles" collection in Firestore
@@ -67,71 +80,89 @@ const KidProfileScreen = ({navigation, route}) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Add Kid's Profile</Text>
+      <Text style={styles.title}>Kid Profile</Text>
       <Input
-        placeholder="Kid's Name"
-        placeholderTextColor={'#fff'}
-        onChangeText={text => setKidName(text)}
         style={styles.input}
+        placeholder="Name"
+        value={name}
+        onChangeText={setName}
       />
-      <View style={styles.avatarContainer}>
-        <Text style={styles.avatarLabel}>Choose Avatar:</Text>
-        <View style={styles.avatars}>{renderAvatars()}</View>
-      </View>
-      <Button
-        title="Add Profile"
-        buttonStyle={styles.button}
-        onPress={addKidProfile}
-        disabled={!kidName || !selectedAvatar}
+      <Input
+        style={styles.input}
+        placeholder="Age"
+        value={age}
+        onChangeText={setAge}
+        keyboardType="numeric"
       />
+      <Button title="Save" onPress={handleSave} />
     </View>
   );
 };
 
 export default KidProfileScreen;
 
+// const styles = StyleSheet.create({
+//   container: {
+//     flex: 1,
+//     justifyContent: 'center',
+//     alignItems: 'center',
+//     backgroundColor: '#EB6D6D',
+//     padding: 16,
+//   },
+//   title: {
+//     fontSize: 24,
+//     fontWeight: 'bold',
+//     marginBottom: 16,
+//   },
+//   input: {
+//     width: '100%',
+//     height: 40,
+//     borderColor: 'white',
+//     borderWidth: 1,
+//     borderRadius: 8,
+//     marginBottom: 16,
+//     paddingLeft: 8,
+//   },
+//   avatarContainer: {
+//     marginTop: 10,
+//     marginBottom: 20,
+//   },
+//   avatarLabel: {
+//     fontSize: 18,
+//     marginBottom: 10,
+//   },
+//   avatars: {
+//     flexDirection: 'row',
+//     justifyContent: 'space-around',
+//   },
+//   avatarImage: {
+//     width: 90,
+//     height: 90,
+//     borderRadius: 45,
+//     margin: 5,
+//   },
+//   button: {
+//     backgroundColor: '#42b0f4',
+//     borderRadius: 8,
+//   },
+// });
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#EB6D6D',
-    padding: 16,
   },
   title: {
     fontSize: 24,
     fontWeight: 'bold',
-    marginBottom: 16,
-  },
-  input: {
-    width: '100%',
-    height: 40,
-    borderColor: 'white',
-    borderWidth: 1,
-    borderRadius: 8,
-    marginBottom: 16,
-    paddingLeft: 8,
-  },
-  avatarContainer: {
-    marginTop: 10,
     marginBottom: 20,
   },
-  avatarLabel: {
-    fontSize: 18,
+  input: {
+    width: 200,
+    height: 40,
+    borderColor: 'gray',
+    borderWidth: 1,
     marginBottom: 10,
-  },
-  avatars: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-  },
-  avatarImage: {
-    width: 90,
-    height: 90,
-    borderRadius: 45,
-    margin: 5,
-  },
-  button: {
-    backgroundColor: '#42b0f4',
-    borderRadius: 8,
+    paddingHorizontal: 10,
   },
 });
