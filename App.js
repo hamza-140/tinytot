@@ -24,7 +24,7 @@ const App = () => {
       <NavigationContainer ref={navigator => setNavigator(navigator)}>
         <StatusBar hidden={true} />
         <Stack.Navigator
-          initialRouteName="Test"
+          initialRouteName="Checker"
           screenOptions={{headerShown: false}}>
           <Stack.Screen name="Test" component={TestScreen} />
           <Stack.Screen name="Checker" component={Checker} />
