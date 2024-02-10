@@ -16,6 +16,8 @@ import {setNavigator} from './ref/navigationRef';
 import Login from './screens/Login/Login';
 import Checker from './screens/Checker';
 import TestScreen from './TestScreen';
+import Phonics from './screens/English/Phonics';
+import Vocabulary from './screens/English/Vocabulary';
 const Stack = createNativeStackNavigator();
 
 const App = () => {
@@ -34,9 +36,11 @@ const App = () => {
           <Stack.Screen name="KidProfile" component={KidProfileScreen} />
           <Stack.Screen name="Main" component={MainMenu} />
           <Stack.Screen name="English" component={EnglishHome} />
+          <Stack.Screen name="Vocabulary" component={Vocabulary} />
           <Stack.Screen name="Alphabets" component={Alphabets} />
           <Stack.Screen name="Games" component={YouTubePlayer} />
           <Stack.Screen name="Trace" component={LetterTracing} />
+          <Stack.Screen name="Phonics" component={Phonics} />
         </Stack.Navigator>
       </NavigationContainer>
     </AuthProvider>
