@@ -8,8 +8,8 @@ TinyTot allows parents to create an account and add their baby’s information, 
 To install and run TinyTot, you need to clone this repository and install the dependencies using the following commands:
 
 git clone https://github.com/hamza-140/tinytot.git
-cd tinytot
-npm install
+<br/>cd tinytot
+<br/>npm install
 
 To start the server, run:
 
