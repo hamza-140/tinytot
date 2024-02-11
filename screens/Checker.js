@@ -1,8 +1,7 @@
 import {useContext, useEffect} from 'react';
 import {Context} from '../context/AuthContext';
 const Checker = () => {
-  const {state, signup, clearErrorMessage, tryLocalSignIn} =
-    useContext(Context);
+  const {tryLocalSignIn} = useContext(Context);
 
   useEffect(() => {
     tryLocalSignIn();

@@ -1,15 +1,31 @@
+/* 
+                                                ============================
+                                                | IMPORTS AND DEPENDENCIES |  
+                                                ============================
+*/
+
 import createDataContext from './createDataContext';
 import auth from '@react-native-firebase/auth';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import {navigate} from '../ref/navigationRef';
-import RNSecureKeyStore, {ACCESSIBLE} from 'react-native-secure-key-store';
 import * as Keychain from 'react-native-keychain';
 import {firebase} from '@react-native-firebase/firestore';
-// Define action types
+
+/* 
+                                                ================
+                                                | ACTION TYPES |  
+                                                ================
+*/
+
 const ADD_ERROR = 'add_error';
 const SIGNUP = 'signup';
 const CLEAR = 'clear_errorMessage';
 const SIGNOUT = 'signout';
+
+/* 
+                                                ==================================================================
+                                                | REDUCER FUNCTION TO UPDATE STATE ON AN ACTION AND DEPENDENCIES |  
+                                                ==================================================================
+*/
 
 const authReducer = (state, action) => {
   switch (action.type) {
@@ -25,6 +41,11 @@ const authReducer = (state, action) => {
       return state;
   }
 };
+/* 
+                                                ===================
+                                                | ACTION FUCTIONS |  
+                                                ===================
+*/
 
 const clearErrorMessage = dispatch => () => {
   dispatch({type: CLEAR});
@@ -72,7 +93,6 @@ const signup =
       const token = user.uid;
       await Keychain.setGenericPassword('token', token);
       dispatch({type: SIGNUP, payload: token});
-
       navigate('KidProfile', {parentId: user.uid});
     } catch (error) {
       console.error('Error during signup:', error);
@@ -82,6 +102,12 @@ const signup =
       });
     }
   };
+
+/* 
+                                                ===============
+                                                | CHECK TOKEN |  
+                                                ===============
+*/
 
 const tryLocalSignIn = dispatch => async () => {
   try {

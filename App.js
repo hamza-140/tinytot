@@ -1,3 +1,9 @@
+/* 
+                                                ============================
+                                                | IMPORTS AND DEPENDENCIES |  
+                                                ============================
+*/
+
 import React from 'react';
 import {StatusBar} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
@@ -24,6 +30,12 @@ import WorkbookHome from './screens/Workbook/WorkbookHome';
 import PhonicsLessons from './screens/English/PhonicsLessons';
 import EnglishLessons from './screens/English/EnglishLessons';
 const Stack = createNativeStackNavigator();
+
+/* 
+                                                ================
+                                                | APP FUNCTION |  
+                                                ================
+*/
 
 const App = () => {
   return (
@@ -58,14 +70,3 @@ const App = () => {
 };
 
 export default App;
-// import {Text, View} from 'react-native';
-
-// const App = () => {
-//   return (
-//     <View>
-//       <Text>Hi</Text>
-//     </View>
-//   );
-// };
-
-// export default App;
