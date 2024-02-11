@@ -3,6 +3,12 @@ import {Context} from '../context/AuthContext';
 const Checker = () => {
   const {tryLocalSignIn} = useContext(Context);
 
+  /* 
+                                                ===============
+                                                | CHECK TOKEN |  
+                                                ===============
+*/
+
   useEffect(() => {
     tryLocalSignIn();
   }, []);
