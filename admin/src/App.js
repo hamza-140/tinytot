@@ -6,7 +6,7 @@ import sidebar_menu from './constants/sidebar-menu';
 
 import './App.css';
 import Profile from './pages/Profile';
-import Orders from './pages/Orders';
+import Dashboard from './pages/Dashboard';
 import Lesson from './pages/Lesson';
 function App() {
   return (
@@ -17,8 +17,7 @@ function App() {
         <div className="dashboard-body">
           <Routes>
             <Route path="*" element={<div></div>} />
-            <Route exact path="/" element={<div></div>} />
-            <Route exact path="/progress" element={<Orders />} />
+            <Route exact path="/" element={<Dashboard />} />
             <Route exact path="/lesson" element={<Lesson />} />
             <Route exact path="/profile" element={<Profile />} />
           </Routes>

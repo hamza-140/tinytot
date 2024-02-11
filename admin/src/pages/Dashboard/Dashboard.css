@@ -1,0 +1,25 @@
+.parent-list {
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.parent-item {
+  list-style: none;
+  margin-bottom: 20px;
+}
+
+.parent-details {
+  border: 1px solid #ced4da;
+  border-radius: 8px;
+  padding: 10px;
+}
+
+.parent-details > div {
+  margin-bottom: 10px;
+}
+
+.parent-details strong {
+  margin-right: 10px;
+}

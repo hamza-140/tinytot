@@ -12,12 +12,6 @@ const sidebar_menu = [
   },
   {
     id: 2,
-    icon: ProductIcon,
-    path: '/progress',
-    title: 'Progress',
-  },
-  {
-    id: 3,
     icon: ShippingIcon,
     path: '/lesson',
     title: 'Lessons',

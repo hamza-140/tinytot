@@ -22,6 +22,7 @@
 // export const db = getDatabase(app);
 // Import the functions you need from the SDKs you need
 import {initializeApp} from 'firebase/app';
+import {getAuth} from 'firebase/auth';
 import {getDatabase} from 'firebase/database';
 
 // Your web app's Firebase configuration
@@ -39,5 +40,6 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
+const auth = getAuth(app); // Initialize the auth module
 
-export {app, db};
+export {app, db, auth};

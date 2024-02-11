@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Tts from 'react-native-tts';
-const Phonics = ({route}) => {
+const Phonics = ({navigation, route}) => {
   const [word, setWord] = useState('');
   const [letters, setLetters] = useState([]);
   useEffect(() => {
@@ -31,8 +31,8 @@ const Phonics = ({route}) => {
   const handleResetPress = () => {
     // Logic to reload the screen
     // For simplicity, let's just reset the state
-    setWord('CAT');
-    setLetters(['C', 'A', 'T']);
+    setWord(word);
+    setLetters(letters);
   };
 
   return (
@@ -52,6 +52,11 @@ const Phonics = ({route}) => {
       </View>
       <TouchableOpacity onPress={handleResetPress} style={styles.resetButton}>
         <Icon name="refresh" size={30} color="black" />
+      </TouchableOpacity>
+      <TouchableOpacity
+        onPress={() => navigation.goBack()}
+        style={styles.backButton}>
+        <Icon name="backward" size={30} color="black" />
       </TouchableOpacity>
     </View>
   );
@@ -84,6 +89,11 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 20,
     right: 20,
+  },
+  backButton: {
+    position: 'absolute',
+    top: 20,
+    left: 20,
   },
 });
 
