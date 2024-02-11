@@ -4,6 +4,9 @@ import {Input, Button} from 'react-native-elements';
 import * as Animatable from 'react-native-animatable';
 import {Context} from '../../context/AuthContext';
 import auth from '@react-native-firebase/auth';
+import {firebase} from '@react-native-firebase/firestore';
+
+import * as Keychain from 'react-native-keychain';
 
 const Login = ({navigation}) => {
   const {state, signin, clearErrorMessage} = useContext(Context);
@@ -19,9 +22,18 @@ const Login = ({navigation}) => {
       // Perform your authentication logic (e.g., sign-in with email and password)
       const response = await auth().signInWithEmailAndPassword(email, password);
       await signin({email, password});
-
+      await Keychain.setGenericPassword('name', name);
       // Retrieve the user UID from the response
       const userUid = response.user.uid;
+      const db = firebase.firestore();
+      const doc = await db.collection('kidProfiles').doc(userUid).get();
+      const kidName = doc.exists ? doc.data().kidName : null;
+
+      // Set the kid's name in Keychain for later use
+      await Keychain.setGenericPassword('name', kidName);
+
+      // Now, you can navigate to another screen and pass the user UID and kid's name as parameters
+      navigation.navigate('Main');
 
       // Now, you can navigate to another screen and pass the user UID as a parameter
       // navigation.navigate('KidProfile', {parentUid: userUid});
@@ -107,6 +119,7 @@ const styles = StyleSheet.create({
     fontSize: 36,
     fontWeight: 'bold',
     marginBottom: 16,
+    color: '#fff',
   },
   inputContainer: {
     width: '100%',

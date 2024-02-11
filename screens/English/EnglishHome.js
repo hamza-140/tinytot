@@ -27,11 +27,8 @@ const EnglishHome = ({navigation}) => {
     {id: '1', title: 'Alphabet'},
     {id: '2', title: 'Games'},
     {id: '3', title: 'Tracing'},
-    {id: '4', title: 'Math'},
-    {id: '5', title: 'English'},
-    {id: '6', title: 'Math'},
-    {id: '7', title: 'Math'},
-    {id: '8', title: 'Math'},
+    {id: '4', title: 'Quiz'},
+    {id: '5', title: 'Lessons'},
   ];
   const renderCard = ({item}) => (
     <Card letter={item.title} onPress={() => start(item.id)} heading1={true} />

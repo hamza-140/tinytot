@@ -18,6 +18,9 @@ import Checker from './screens/Checker';
 import TestScreen from './TestScreen';
 import Phonics from './screens/English/Phonics';
 import Vocabulary from './screens/English/Vocabulary';
+import MathHome from './screens/Math/MathHome';
+import ScienceHome from './screens/Science/ScienceHome';
+import WorkbookHome from './screens/Workbook/WorkbookHome';
 const Stack = createNativeStackNavigator();
 
 const App = () => {
@@ -36,6 +39,9 @@ const App = () => {
           <Stack.Screen name="KidProfile" component={KidProfileScreen} />
           <Stack.Screen name="Main" component={MainMenu} />
           <Stack.Screen name="English" component={EnglishHome} />
+          <Stack.Screen name="Math" component={MathHome} />
+          <Stack.Screen name="Science" component={ScienceHome} />
+          <Stack.Screen name="Workbook" component={WorkbookHome} />
           <Stack.Screen name="Vocabulary" component={Vocabulary} />
           <Stack.Screen name="Alphabets" component={Alphabets} />
           <Stack.Screen name="Games" component={YouTubePlayer} />

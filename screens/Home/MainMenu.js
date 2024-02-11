@@ -14,35 +14,37 @@ import {
 import AwesomeAlert from 'react-native-awesome-alerts';
 import Sound from 'react-native-sound';
 import Card from '../../components/Card';
-const MainMenu = ({navigation}) => {
+const MainMenu = ({navigation, route}) => {
   const [kidName, setKidName] = useState('');
-  useEffect(() => {
-    const fetchKidName = async () => {
-      try {
-        const documentSnapshot = await firestore()
-          .collection('kidProfiles') // Replace 'yourCollection' with the actual name of your collection
-          .doc('4pagNngyngfezNgUiwTG')
-          .get();
+  // useEffect(() => {
+  //   const fetchKidName = async () => {
+  //     try {
+  //       const documentSnapshot = await firestore()
+  //         .collection('kidProfiles') // Replace 'yourCollection' with the actual name of your collection
+  //         .doc('4pagNngyngfezNgUiwTG')
+  //         .get();
 
-        if (documentSnapshot.exists) {
-          const data = documentSnapshot.data();
-          const kidNameValue = data.kidName;
-          setKidName(kidNameValue);
-        } else {
-          console.log('Document does not exist');
-        }
-      } catch (error) {
-        console.error('Error fetching document: ', error);
-      }
-    };
+  //       if (documentSnapshot.exists) {
+  //         const data = documentSnapshot.data();
+  //         const kidNameValue = data.kidName;
+  //         setKidName(kidNameValue);
+  //       } else {
+  //         console.log('Document does not exist');
+  //       }
+  //     } catch (error) {
+  //       console.error('Error fetching document: ', error);
+  //     }
+  //   };
 
-    fetchKidName();
-  }, []);
+  //   fetchKidName();
+  // }, []);
   const [sound, setSound] = useState(null);
   const [simg, setSimg] = useState(require('../../assets/soundOn.png'));
   const start = id => {
     if (id == 1) {
       navigation.navigate('English');
+    } else if (id == 2) {
+      navigation.navigate('Math');
     }
   };
   useEffect(() => {
@@ -89,12 +91,8 @@ const MainMenu = ({navigation}) => {
   const data = [
     {id: '1', title: 'English'},
     {id: '2', title: 'Math'},
-    {id: '3', title: 'Math'},
-    {id: '4', title: 'Math'},
-    {id: '5', title: 'English'},
-    {id: '6', title: 'Math'},
-    {id: '7', title: 'Math'},
-    {id: '8', title: 'Math'},
+    {id: '3', title: 'Science'},
+    {id: '4', title: 'Workbook'},
   ];
 
   const renderCard = ({item}) => (
@@ -136,7 +134,7 @@ const MainMenu = ({navigation}) => {
           show={setting}
           showProgress={false}
           title="Settings"
-          message={`Do you want to exit? ${kidName}`}
+          message={`Do you want to exit?`}
           closeOnTouchOutside={true}
           closeOnHardwareBackPress={false}
           showCancelButton={true}

@@ -58,30 +58,27 @@ const signup =
   dispatch =>
   async ({name, email, password}) => {
     try {
-      firebase
+      const userCredential = await firebase
         .auth()
-        .createUserWithEmailAndPassword(email, password)
-        .then(userCredential => {
-          const user = userCredential.user;
-          const db = firebase.firestore();
-          db.collection('parents')
-            .doc(user.uid)
-            .set({name, email, password, kidInfo: {}})
-            .then(() => {
-              navigate('KidProfile', {parentId: user.uid});
-            })
-            .catch(error => {
-              console.error('Error adding document: ', error);
-            });
-        })
-        .catch(error => {
-          console.error(error);
-        });
-    } catch (err) {
-      console.error(err);
+        .createUserWithEmailAndPassword(email, password);
+      const user = userCredential.user;
+      const db = firebase.firestore();
+
+      await db
+        .collection('parents')
+        .doc(user.uid)
+        .set({name, email, password, kidInfo: {}});
+
+      const token = user.uid;
+      await Keychain.setGenericPassword('token', token);
+      dispatch({type: SIGNUP, payload: token});
+
+      navigate('KidProfile', {parentId: user.uid});
+    } catch (error) {
+      console.error('Error during signup:', error);
       dispatch({
         type: ADD_ERROR,
-        payload: 'Something went wrong!',
+        payload: 'Something went wrong during signup!',
       });
     }
   };
