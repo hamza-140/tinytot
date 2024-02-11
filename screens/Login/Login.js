@@ -1,51 +1,67 @@
-import React, {useContext, useEffect, useState} from 'react';
+/* 
+                                                ============================
+                                                | IMPORTS AND DEPENDENCIES |  
+                                                ============================
+*/
+
+import React, {useContext, useState} from 'react';
 import {View, StyleSheet, TouchableOpacity, Text} from 'react-native';
 import {Input, Button} from 'react-native-elements';
 import * as Animatable from 'react-native-animatable';
 import {Context} from '../../context/AuthContext';
-import auth from '@react-native-firebase/auth';
-import {firebase} from '@react-native-firebase/firestore';
 
-import * as Keychain from 'react-native-keychain';
+/* 
+                                                ==================
+                                                | LOGIN FUNCTION |  
+                                                ==================
+*/
 
 const Login = ({navigation}) => {
-  const {state, signin, clearErrorMessage} = useContext(Context);
+  const {signin} = useContext(Context);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  /*
+                                                ======================
+                                                | CHECK EMAIL FORMAT |  
+                                                ======================
+*/
+
   const isEmailValid = email => {
     // Simple email validation using a regular expression
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
   };
-  const handleLogin = async () => {
-    try {
-      // Perform your authentication logic (e.g., sign-in with email and password)
-      const response = await auth().signInWithEmailAndPassword(email, password);
-      await signin({email, password});
-      await Keychain.setGenericPassword('name', name);
-      // Retrieve the user UID from the response
-      const userUid = response.user.uid;
-      const db = firebase.firestore();
-      const doc = await db.collection('kidProfiles').doc(userUid).get();
-      const kidName = doc.exists ? doc.data().kidName : null;
 
-      // Set the kid's name in Keychain for later use
-      await Keychain.setGenericPassword('name', kidName);
+  // const handleLogin = async () => {
+  // try {
+  // Perform your authentication logic (e.g., sign-in with email and password)
+  // const response = await auth().signInWithEmailAndPassword(email, password);
+  // await signin({email, password});
+  // await Keychain.setGenericPassword('name', name);
+  // Retrieve the user UID from the response
+  // const userUid = response.user.uid;
+  // const db = firebase.firestore();
+  // const doc = await db.collection('kidProfiles').doc(userUid).get();
+  // const kidName = doc.exists ? doc.data().kidName : null;
 
-      // Now, you can navigate to another screen and pass the user UID and kid's name as parameters
-      navigation.navigate('Main');
+  // Set the kid's name in Keychain for later use
+  // await Keychain.setGenericPassword('name', kidName);
 
-      // Now, you can navigate to another screen and pass the user UID as a parameter
-      // navigation.navigate('KidProfile', {parentUid: userUid});
-      console.log(userUid);
-    } catch (error) {
-      console.error('Authentication error:', error);
-    }
-    console.log(email);
-    console.log(password);
-    setEmail('');
-    setPassword('');
-  };
+  // Now, you can navigate to another screen and pass the user UID and kid's name as parameters
+  // navigation.navigate('Main');
+
+  // Now, you can navigate to another screen and pass the user UID as a parameter
+  // navigation.navigate('KidProfile', {parentUid: userUid});
+  // console.log(userUid);
+  // } catch (error) {
+  //   console.error('Authentication error:', error);
+  // }
+  // console.log(email);
+  // console.log(password);
+  // setEmail('');
+  // setPassword('');
+  // };
 
   return (
     <View style={styles.container}>
@@ -77,7 +93,9 @@ const Login = ({navigation}) => {
           disabled={!isEmailValid(email) || password.length < 6}
           title="Login"
           buttonStyle={styles.button}
-          onPress={handleLogin}
+          onPress={() => {
+            signin({email, password});
+          }}
         />
       </Animatable.View>
       <Animatable.View animation="fadeInUp" style={styles.inputContainer}>

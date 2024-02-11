@@ -1,4 +1,10 @@
-import React, {useContext, useEffect, useState} from 'react';
+/* 
+                                                ============================
+                                                | IMPORTS AND DEPENDENCIES |  
+                                                ============================
+*/
+
+import React, {useContext, useState} from 'react';
 import {
   View,
   StyleSheet,
@@ -9,10 +15,15 @@ import {
 import {Input, Button} from 'react-native-elements';
 import * as Animatable from 'react-native-animatable';
 import {Context} from '../../context/AuthContext';
-import auth from '@react-native-firebase/auth';
+
+/* 
+                                                ===================
+                                                | SIGNUP FUNCTION |  
+                                                ===================
+*/
 
 const Signup = ({navigation}) => {
-  const {state, signin, clearErrorMessage, signup} = useContext(Context);
+  const {signup} = useContext(Context);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -21,26 +32,7 @@ const Signup = ({navigation}) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
   };
-  const handleLogin = async () => {
-    try {
-      // Perform your authentication logic (e.g., sign-in with email and password)
-      const response = await auth().signInWithEmailAndPassword(email, password);
-      await signin({email, password});
 
-      // Retrieve the user UID from the response
-      const userUid = response.user.uid;
-
-      // Now, you can navigate to another screen and pass the user UID as a parameter
-      // navigation.navigate('KidProfile', {parentUid: userUid});
-      console.log(userUid);
-    } catch (error) {
-      console.error('Authentication error:', error);
-    }
-    console.log(email);
-    console.log(password);
-    setEmail('');
-    setPassword('');
-  };
   return (
     <ScrollView
       contentContainerStyle={styles.scrollContainer}
