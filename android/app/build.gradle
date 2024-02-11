@@ -121,7 +121,8 @@ dependencies {
     implementation("com.facebook.react:flipper-integration")
     implementation('androidx.security:security-crypto:1.0.0')  // Use a version that supports minSdk 21
     implementation project(':react-native-secure-key-store')
-
+    implementation project(':react-native-video')
+    implementation "androidx.appcompat:appcompat:1.0.0"
 
     if (hermesEnabled.toBoolean()) {
         implementation("com.facebook.react:hermes-android")

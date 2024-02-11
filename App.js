@@ -29,6 +29,10 @@ import ScienceHome from './screens/Science/ScienceHome';
 import WorkbookHome from './screens/Workbook/WorkbookHome';
 import PhonicsLessons from './screens/English/PhonicsLessons';
 import EnglishLessons from './screens/English/EnglishLessons';
+import Profile from './screens/Profile';
+import PhonicsHome from './screens/English/PhonicsHome';
+import PhonicsVideo from './screens/English/PhonicsVideo';
+import PhonicsVideoList from './screens/English/PhonicsVideoList';
 const Stack = createNativeStackNavigator();
 
 /* 
@@ -61,8 +65,12 @@ const App = () => {
           <Stack.Screen name="Alphabets" component={Alphabets} />
           <Stack.Screen name="Games" component={YouTubePlayer} />
           <Stack.Screen name="Trace" component={LetterTracing} />
+          <Stack.Screen name="Profile" component={Profile} />
           <Stack.Screen name="Phonics" component={Phonics} />
           <Stack.Screen name="PhonicsLessons" component={PhonicsLessons} />
+          <Stack.Screen name="PhonicsHome" component={PhonicsHome} />
+          <Stack.Screen name="PhonicsVideo" component={PhonicsVideo} />
+          <Stack.Screen name="PhonicsVideoList" component={PhonicsVideoList} />
         </Stack.Navigator>
       </NavigationContainer>
     </AuthProvider>

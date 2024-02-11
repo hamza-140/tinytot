@@ -15,10 +15,18 @@ function Lesson() {
 
   const handleFileUpload = async () => {
     const storage = getStorage();
-    const storageRef = ref(
-      storage,
-      `lessons/${lessonCategory}/${selectedEnglishCategory}/${lessonTitle}/${lessonDetail}`,
-    );
+    let storageRef;
+    if (lessonType === 'video') {
+      storageRef = ref(
+        storage,
+        `lessons/${lessonCategory}/${selectedEnglishCategory}/Video/${file.name}`,
+      );
+    } else {
+      storageRef = ref(
+        storage,
+        `lessons/${lessonCategory}/${selectedEnglishCategory}/${lessonTitle}/${lessonDetail}`,
+      );
+    }
 
     try {
       await uploadBytes(storageRef, file);

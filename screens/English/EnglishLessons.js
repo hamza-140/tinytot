@@ -17,7 +17,7 @@ const EnglishLessons = ({navigation}) => {
       navigation.navigate('Alphabets');
     }
     if (id == 2) {
-      navigation.navigate('PhonicsLessons');
+      navigation.navigate('PhonicsHome');
     }
     if (id == 3) {
       navigation.navigate('Vocabulary');
