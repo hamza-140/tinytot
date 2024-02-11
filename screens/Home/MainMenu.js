@@ -92,7 +92,7 @@ const MainMenu = ({navigation, route}) => {
     {id: '1', title: 'English'},
     {id: '2', title: 'Math'},
     {id: '3', title: 'Science'},
-    {id: '4', title: 'Workbook'},
+    {id: '4', title: 'Profile'},
   ];
 
   const renderCard = ({item}) => (

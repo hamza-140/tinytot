@@ -1,8 +1,9 @@
 import React, {useState} from 'react';
 import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 import Tts from 'react-native-tts';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
-const Vocabulary = () => {
+const Vocabulary = ({navigation}) => {
   const word = 'example';
   const definition =
     'a thing characteristic of its kind or illustrating a general rule';
@@ -30,6 +31,11 @@ const Vocabulary = () => {
 
   return (
     <View style={styles.container}>
+      <TouchableOpacity
+        onPress={() => navigation.goBack()}
+        style={styles.backButton}>
+        <Icon name="backward" size={30} color="black" />
+      </TouchableOpacity>
       <Text style={styles.word}>{word}</Text>
       <Text style={styles.definition}>{definition}</Text>
       <TouchableOpacity onPress={speakWord}>
@@ -56,6 +62,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     padding: 20,
+  },
+  backButton: {
+    position: 'absolute',
+    top: 20,
+    left: 20,
   },
   word: {
     fontSize: 24,

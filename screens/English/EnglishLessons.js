@@ -11,23 +11,23 @@ import {
 } from 'react-native';
 import Card from '../../components/Card';
 
-const EnglishHome = ({navigation}) => {
+const EnglishLessons = ({navigation}) => {
   const start = id => {
     if (id == 1) {
-      navigation.navigate('EnglishLessons');
+      navigation.navigate('Alphabets');
     }
     if (id == 2) {
-      navigation.navigate('Games');
+      navigation.navigate('PhonicsLessons');
     }
     if (id == 3) {
-      navigation.navigate('Trace');
+      navigation.navigate('Vocabulary');
     }
   };
   const data = [
-    {id: '1', title: 'Lessons'},
-    {id: '2', title: 'Games'},
-    {id: '3', title: 'Stories'},
-    {id: '4', title: 'Quiz'},
+    {id: '1', title: 'Alphabets'},
+    {id: '2', title: 'Phonics'},
+    {id: '3', title: 'Vocabulary'},
+    {id: '4', title: 'Grammer'},
   ];
   const renderCard = ({item}) => (
     <Card letter={item.title} onPress={() => start(item.id)} heading1={true} />
@@ -64,7 +64,7 @@ const EnglishHome = ({navigation}) => {
   );
 };
 
-export default EnglishHome;
+export default EnglishLessons;
 const cardWidth = 150;
 const cardMarginHorizontal = 20;
 
