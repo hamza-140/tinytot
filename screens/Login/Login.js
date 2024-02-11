@@ -95,6 +95,8 @@ const Login = ({navigation}) => {
           buttonStyle={styles.button}
           onPress={() => {
             signin({email, password});
+            setEmail('');
+            setPassword('');
           }}
         />
       </Animatable.View>

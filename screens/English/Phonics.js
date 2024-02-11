@@ -31,8 +31,8 @@ const Phonics = ({navigation, route}) => {
   const handleResetPress = () => {
     // Logic to reload the screen
     // For simplicity, let's just reset the state
-    setWord(word);
-    setLetters(letters);
+    setWord(route.params);
+    setLetters(route.params.split(''));
   };
 
   return (

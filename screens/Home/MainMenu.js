@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import firestore from '@react-native-firebase/firestore';
 
 import {
@@ -14,7 +14,9 @@ import {
 import AwesomeAlert from 'react-native-awesome-alerts';
 import Sound from 'react-native-sound';
 import Card from '../../components/Card';
+import {Context} from '../../context/AuthContext';
 const MainMenu = ({navigation, route}) => {
+  const {signout} = useContext(Context);
   const [kidName, setKidName] = useState('');
   // useEffect(() => {
   //   const fetchKidName = async () => {
@@ -42,6 +44,9 @@ const MainMenu = ({navigation, route}) => {
   const [simg, setSimg] = useState(require('../../assets/soundOn.png'));
   const start = id => {
     if (id == 1) {
+      sound.stop();
+      setSimg(require('../../assets/soundOff.png'));
+
       navigation.navigate('English');
     } else if (id == 2) {
       navigation.navigate('Math');
@@ -146,7 +151,10 @@ const MainMenu = ({navigation, route}) => {
             setSetting(false);
           }}
           onConfirmPressed={() => {
-            BackHandler.exitApp();
+            sound.stop();
+            setSimg(require('../../assets/soundOff.png'));
+            signout();
+            // BackHandler.exitApp();
           }}
         />
       </View>

@@ -49,7 +49,7 @@ const Alphabets = ({navigation}) => {
     const sound = sounds[letter];
     if (sound) {
       // Play the specific sound for the clicked letter
-      sound.setSpeed(0.5);
+      // sound.setSpeed(0.5);
       sound.play(() => {
         // Optionally, you can do something after the sound has finished playing
       });

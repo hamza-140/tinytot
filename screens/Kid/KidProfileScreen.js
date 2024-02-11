@@ -1,3 +1,9 @@
+/* 
+                                                ============================
+                                                | IMPORTS AND DEPENDENCIES |  
+                                                ============================
+*/
+
 import firestore from '@react-native-firebase/firestore';
 import React, {useState} from 'react';
 import {
@@ -9,8 +15,13 @@ import {
   ScrollView,
 } from 'react-native';
 import {Input, Button} from 'react-native-elements';
-import auth from '@react-native-firebase/auth';
 import * as Keychain from 'react-native-keychain';
+
+/* 
+                                                ===================
+                                                | ADD KID PROFILE |  
+                                                ===================
+*/
 
 const KidProfileScreen = ({navigation, route}) => {
   const {parentId} = route.params;
@@ -22,36 +33,9 @@ const KidProfileScreen = ({navigation, route}) => {
         kidInfo: {name, age},
       });
       console.log('Kid information saved!');
-      await Keychain.setGenericPassword('name', name);
       navigation.navigate('Main');
     } catch (error) {
       console.error('Error updating document: ', error);
-    }
-  };
-  const addKidProfile = async () => {
-    try {
-      // Reference to the "kidProfiles" collection in Firestore
-      const response = await auth().signInWithEmailAndPassword(
-        'hamza@mail.com',
-        '123456',
-      );
-
-      // Retrieve the user UID from the response
-      const userUid = response.user.uid;
-      const parentUid = userUid;
-      console.log(parentUid);
-      const kidProfileRef = firestore().collection('kidProfiles');
-
-      // Add a document to the "kidProfiles" collection
-      const docRef = await kidProfileRef.add({
-        parentUid,
-        kidName,
-      });
-
-      console.log('Kid profile added successfully! Document ID:', docRef.id);
-      navigation.navigate('Main');
-    } catch (error) {
-      console.error('Error adding kid profile:', error);
     }
   };
   const CustomAvatar = ({imageSource, onPress, isSelected}) => (
@@ -90,7 +74,6 @@ const KidProfileScreen = ({navigation, route}) => {
     ));
   };
 
-  const [kidName, setKidName] = useState('');
   const [selectedAvatar, setSelectedAvatar] = useState(null);
 
   return (
@@ -126,51 +109,12 @@ const KidProfileScreen = ({navigation, route}) => {
 
 export default KidProfileScreen;
 
-// const styles = StyleSheet.create({
-//   container: {
-// flex: 1,
-// justifyContent: 'center',
-// alignItems: 'center',
-// backgroundColor: '#EB6D6D',
-// padding: 16,
-//   },
-//   title: {
-//     fontSize: 24,
-//     fontWeight: 'bold',
-//     marginBottom: 16,
-//   },
-// input: {
-//   width: '100%',
-//   height: 40,
-//   borderColor: 'white',
-//   borderWidth: 1,
-//   borderRadius: 8,
-//   marginBottom: 16,
-//   paddingLeft: 8,
-// },
-//   avatarContainer: {
-//     marginTop: 10,
-//     marginBottom: 20,
-//   },
-//   avatarLabel: {
-//     fontSize: 18,
-//     marginBottom: 10,
-//   },
-//   avatars: {
-//     flexDirection: 'row',
-//     justifyContent: 'space-around',
-//   },
-//   avatarImage: {
-//     width: 90,
-//     height: 90,
-//     borderRadius: 45,
-//     margin: 5,
-//   },
-//   button: {
-//     backgroundColor: '#42b0f4',
-//     borderRadius: 8,
-//   },
-// });
+/* 
+                                                ==========
+                                                | STYLES |  
+                                                ==========
+*/
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
