@@ -66,12 +66,12 @@ const Profile = ({navigation}) => {
           <View>
             <Text style={styles.title}>Kid Info</Text>
             <View style={styles.inputContainer}>
-              <Text style={{color: 'cyan', fontWeight: 'bold'}}>
+              <Text style={{color: 'black', fontWeight: 'bold'}}>
                 Name: {kidInfo.name}
               </Text>
             </View>
             <View style={styles.inputContainer}>
-              <Text style={{color: 'cyan', fontWeight: 'bold'}}>
+              <Text style={{color: 'black', fontWeight: 'bold'}}>
                 Age: {kidInfo.age}
               </Text>
               {/* Add more fields as needed */}
@@ -103,6 +103,7 @@ const styles = StyleSheet.create({
     padding: 10,
     marginBottom: 16,
     borderWidth: 1,
+    borderRadius: 8,
   },
   button: {
     backgroundColor: '#42b0f4',
