@@ -38,7 +38,7 @@ const Phonics = ({navigation, route}) => {
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={handleSoundPress}>
-        <Text style={styles.sound}>{word}</Text>
+        <Text style={styles.sound}>{word.toUpperCase()}</Text>
       </TouchableOpacity>
       <View style={styles.lettersContainer}>
         {letters.map((letter, index) => (
@@ -46,7 +46,7 @@ const Phonics = ({navigation, route}) => {
             key={index}
             onPress={() => handleLetterPress(index)}
             style={styles.letter}>
-            <Text>{letter}</Text>
+            <Text>{letter.toUpperCase()}</Text>
           </TouchableOpacity>
         ))}
       </View>
