@@ -11,6 +11,7 @@ build/
 !default.mode1v3
 *.mode2v3
 !default.mode2v3
+app-debug.apk
 *.perspectivev3
 !default.perspectivev3
 xcuserdata
@@ -21,7 +22,7 @@ DerivedData
 *.ipa
 *.xcuserstate
 ios/.xcode.env.local
-
+.env
 # Android/IntelliJ
 #
 build/
