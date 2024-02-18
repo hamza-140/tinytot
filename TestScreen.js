@@ -12,22 +12,29 @@ import {
 const TestScreen = () => {
   const [matched, setMatched] = useState(false);
   const [dropZonePosition, setDropZonePosition] = useState({x: 150, y: 200});
-  const [pan] = useState(new Animated.ValueXY({x: 0, y: 0}));
+  const pan = useRef(new Animated.ValueXY({x: 0, y: 0})).current;
+  const handlePanResponderMove = (event, gestureState) => {
+    console.log('Current X coordinate:', gestureState.moveX);
+    console.log('Current Y coordinate:', gestureState.moveY);
+
+    Animated.event(
+      [
+        null,
+        {
+          dx: pan.x,
+          dy: pan.y,
+        },
+      ],
+      {
+        useNativeDriver: false,
+      },
+    )(event, gestureState);
+  };
+
   const panResponder = useRef(
     PanResponder.create({
-      onStartShouldSetPanResponder: () => !matched,
-      onPanResponderMove: Animated.event(
-        [
-          null,
-          {
-            dx: pan.x,
-            dy: pan.y,
-          },
-        ],
-        {
-          useNativeDriver: false,
-        },
-      ),
+      onStartShouldSetPanResponder: () => true,
+      onPanResponderMove: handlePanResponderMove,
       onPanResponderRelease: () => {
         const match = isMatched();
         setMatched(match);
@@ -42,16 +49,12 @@ const TestScreen = () => {
   ).current;
 
   const isMatched = () => {
-    // Implement matching logic for each shape
-    if (
-      // Check if draggable shape matches circle
-      // Example: if the draggable shape is inside the circle
-      // Implement similar checks for other shapes
-      draggableShapeIsInsideCircle(pan.x._value, pan.y._value)
-    ) {
-      return true;
-    }
-    return false;
+    const distanceSquared =
+      Math.pow(pan.x._value - dropZonePosition.x, 2) +
+      Math.pow(pan.y._value - dropZonePosition.y, 2);
+    const radiusSquared = Math.pow(50, 2);
+
+    return distanceSquared <= radiusSquared;
   };
 
   const updateDropZonePosition = layout => {
@@ -61,32 +64,14 @@ const TestScreen = () => {
 
   const resetScreen = () => {
     setMatched(false);
-    Animated.spring(pan, {
-      toValue: {x: 0, y: 0},
-      useNativeDriver: false,
-    }).start();
+    pan.setValue({x: 0, y: 0});
   };
-
-  // Define function to check if draggable shape is inside circle
-  const draggableShapeIsInsideCircle = (x, y) => {
-    // Calculate distance between draggable shape and circle center
-    const distanceSquared =
-      Math.pow(x - dropZonePosition.x, 2) + Math.pow(y - dropZonePosition.y, 2);
-    const radiusSquared = Math.pow(50, 2); // Radius of circle (adjust as needed)
-
-    // Check if distance is less than radius (shape is inside circle)
-    return distanceSquared <= radiusSquared;
-  };
-
-  // Define other shape matching functions similarly
 
   return (
     <ImageBackground
       source={require('../tinytot1/assets/bg.jpg')}
       style={styles.background}>
       <View style={styles.container}>
-        {/* Render your actual shapes and shaded areas here */}
-        {/* Example: */}
         <View
           style={[
             styles.circle,
@@ -95,23 +80,21 @@ const TestScreen = () => {
           ]}
           onLayout={event => updateDropZonePosition(event.nativeEvent.layout)}
         />
-        {/* Render other shapes and shaded areas similarly */}
 
-        {/* Draggable shape */}
         <Animated.View
           style={[
-            styles.draggableShape,
+            styles.draggableCircle,
             pan.getLayout(),
             matched ? styles.matched : null,
           ]}
-          {...(matched ? null : panResponder.panHandlers)}
+          {...panResponder.panHandlers}
         />
 
-        {/* Reset button */}
         <TouchableOpacity style={styles.button} onPress={resetScreen}>
           <Text style={styles.buttonText}>Reset</Text>
         </TouchableOpacity>
       </View>
+      //{' '}
     </ImageBackground>
   );
 };
@@ -121,25 +104,28 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    margin: 10,
+    position: 'relative',
   },
-  // Example shape styles (replace with your shapes)
   circle: {
     width: 100,
     height: 100,
-    backgroundColor: 'rgba(255, 0, 0, 0.3)', // Shaded blue color with 30% opacity
+    backgroundColor: 'rgba(255, 0, 0, 0.3)',
     borderWidth: 2,
     borderColor: 'red',
     borderRadius: 50,
     position: 'absolute',
   },
-
-  draggableShape: {
+  draggableCircle: {
+    position: 'absolute',
+    right: 0,
+    top: 0,
     width: 100,
     height: 100,
-    backgroundColor: 'red',
+    backgroundColor: 'blue',
     borderRadius: 50,
-    position: 'absolute',
   },
+
   matched: {
     backgroundColor: 'green',
   },
