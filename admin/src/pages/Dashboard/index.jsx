@@ -3,6 +3,10 @@ import DashboardHeader from '../../components/DashboardHeader';
 import {getFirestore, collection, getDocs} from 'firebase/firestore';
 import {db} from '../../firebase.config';
 import './Dashboard.css'; // Import your CSS file for Dashboard styles
+import {useNavigate} from 'react-router-dom';
+import SideBar from '../../components/Sidebar';
+import sidebar_menu from '../../constants/sidebar-menu';
+import '../../App.css';
 
 // Function to fetch all parents from Firestore
 const fetchAllParents = async () => {
@@ -15,6 +19,8 @@ const fetchAllParents = async () => {
 };
 
 const Dashboard = () => {
+  let navigate = useNavigate();
+
   const [parents, setParents] = useState([]);
 
   useEffect(() => {
@@ -29,25 +35,33 @@ const Dashboard = () => {
 
   return (
     <div className="dashboard-container">
-      <ul className="parent-list">
-        <h1>List of Parents</h1>
-        {parents.map(parent => (
-          <li key={parent.id} className="parent-item">
-            <div className="parent-details">
-              <div>
-                <strong>Parent ID:</strong> {parent.id}
-              </div>
-              <div>
-                <strong>Name:</strong> {parent.name}
-              </div>
-              <div>
-                <strong>Email:</strong> {parent.email}
-              </div>
-              {/* Add more fields as needed */}
-            </div>
-          </li>
-        ))}
-      </ul>
+      <SideBar menu={sidebar_menu} />
+      <div className="dashboard-body">
+        {/* <DashboardHeader /> */}
+        <div className="content-wrapper">
+          <ul className="parent-list">
+            <h1>List of Parents</h1>
+            {parents.map(parent => (
+              <li key={parent.id} className="parent-item">
+                <div
+                  className="parent-details"
+                  onClick={() => {
+                    navigate('/details', {state: {parent}});
+                    console.log({parent});
+                  }}>
+                  <div>
+                    <strong>Name:</strong> {parent.name}
+                  </div>
+                  <div>
+                    <strong>Email:</strong> {parent.email}
+                  </div>
+                  {/* Add more fields as needed */}
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
     </div>
   );
 };
