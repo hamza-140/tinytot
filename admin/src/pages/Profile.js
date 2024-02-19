@@ -6,7 +6,7 @@ const Profile = () => {
   return (
     <div className="dashboard-container">
       <SideBar menu={sidebar_menu} />
-      <div className="dashboard-body">User Profile</div>
+      <div className="dashboard-body">User Profile Screen</div>
     </div>
   );
 };
