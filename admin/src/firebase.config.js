@@ -24,6 +24,7 @@
 import {initializeApp} from 'firebase/app';
 import {getAuth} from 'firebase/auth';
 import {getDatabase} from 'firebase/database';
+import {getStorage} from 'firebase/storage';
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -41,5 +42,6 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 const auth = getAuth(app); // Initialize the auth module
+const storage = getStorage(app); // Initialize the storage module
 
-export {app, db, auth};
+export {app, db, auth, storage};

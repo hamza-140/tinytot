@@ -11,22 +11,24 @@ import {
 } from 'react-native';
 import Card from '../../components/Card';
 
-const MathHome = ({navigation}) => {
+const MathLessons = ({navigation}) => {
   const start = id => {
     if (id == 1) {
-      navigation.navigate('MathLessons');
+      navigation.navigate('Numbers');
     }
     if (id == 2) {
-      navigation.navigate('Games');
+      navigation.navigate('PhonicsHome');
     }
     if (id == 3) {
-      navigation.navigate('Trace');
+      navigation.navigate('Vocabulary');
     }
   };
   const data = [
-    {id: '1', title: 'Lessons'},
-    {id: '2', title: 'Games'},
-    {id: '3', title: 'Quiz'},
+    {id: '1', title: 'Numbers'},
+    {id: '2', title: 'Addition'},
+    {id: '3', title: 'Subtraction'},
+    {id: '4', title: 'Multiply'},
+    {id: '5', title: 'Divide'},
   ];
   const renderCard = ({item}) => (
     <Card letter={item.title} onPress={() => start(item.id)} heading1={true} />
@@ -63,7 +65,7 @@ const MathHome = ({navigation}) => {
   );
 };
 
-export default MathHome;
+export default MathLessons;
 const cardWidth = 150;
 const cardMarginHorizontal = 20;
 

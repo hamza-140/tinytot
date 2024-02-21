@@ -3,16 +3,16 @@ import React from 'react';
 import {View, Text, Image, TouchableOpacity} from 'react-native';
 
 const Card = ({letter, onPress, imageSource, heading1}) => {
-  const displayText = heading1
-    ? letter.toUpperCase()
-    : letter.toUpperCase() + letter;
+  const displayText = heading1 ? letter.toUpperCase() : letter.toUpperCase();
   const fontSize = displayText.length > 6 ? 80 : 120;
 
   return (
     <TouchableOpacity onPress={onPress}>
       <View style={styles.card}>
         <Text style={[styles.cardText, {fontSize}]}>{displayText}</Text>
-        {imageSource && <Image source={imageSource} style={styles.cardImage} />}
+        {imageSource !== null && (
+          <Image source={{uri: imageSource}} style={styles.cardImage} />
+        )}
       </View>
     </TouchableOpacity>
   );

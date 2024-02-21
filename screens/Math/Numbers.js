@@ -7,29 +7,58 @@ import {
   Image,
   FlatList,
   TouchableOpacity,
-  BackHandler,
 } from 'react-native';
-import Card from '../../components/Card';
+import Tts from 'react-native-tts';
 
-const MathHome = ({navigation}) => {
-  const start = id => {
-    if (id == 1) {
-      navigation.navigate('MathLessons');
-    }
-    if (id == 2) {
-      navigation.navigate('Games');
-    }
-    if (id == 3) {
-      navigation.navigate('Trace');
-    }
+import Sound from 'react-native-sound';
+import Card from '../../components/Card';
+import {firebase} from '@react-native-firebase/firestore';
+import storage from '@react-native-firebase/storage'; // Add this import for storage
+
+const Numbers = ({navigation}) => {
+  const [files, setFiles] = useState([]);
+
+  useEffect(() => {
+    const fetchFiles = async () => {
+      try {
+        const folderRef = storage().ref('lessons/Math/Numbers/');
+        const items = await folderRef.listAll();
+        const filesData = await Promise.all(
+          items.items.map(async item => {
+            const url = await item.getDownloadURL();
+            console.log('URL for ' + item.name + ':', url); // Log URL for debugging
+            return {name: item.name, url};
+          }),
+        );
+        setFiles(filesData);
+      } catch (error) {
+        console.error('Error fetching files:', error);
+      }
+    };
+
+    fetchFiles();
+  }, []);
+  const speak = text => {
+    Tts.speak(text);
   };
-  const data = [
-    {id: '1', title: 'Lessons'},
-    {id: '2', title: 'Games'},
-    {id: '3', title: 'Quiz'},
-  ];
+
+  const renderItem = ({item}) => (
+    <View
+      style={{flexDirection: 'row', alignItems: 'center', marginVertical: 5}}>
+      <Image
+        source={{uri: item.url}}
+        style={{width: 50, height: 50, marginRight: 10}}
+      />
+      <Text>{item.name}</Text>
+    </View>
+  );
+
   const renderCard = ({item}) => (
-    <Card letter={item.title} onPress={() => start(item.id)} heading1={true} />
+    <Card
+      letter={item.name}
+      onPress={() => speak(item.name)}
+      imageSource={item.url}
+    />
   );
 
   return (
@@ -38,10 +67,10 @@ const MathHome = ({navigation}) => {
       style={styles.background}>
       <View style={styles.container}>
         <FlatList
-          data={data}
+          data={files}
           horizontal
           renderItem={renderCard}
-          keyExtractor={item => item.id}
+          keyExtractor={item => item.name}
           contentContainerStyle={styles.flatListContainer}
         />
         <Image
@@ -51,7 +80,7 @@ const MathHome = ({navigation}) => {
         <TouchableOpacity
           style={styles.setting}
           onPress={() => {
-            navigation.navigate('Main');
+            navigation.navigate('Math');
           }}>
           <Image
             source={require('../../assets/back.png')}
@@ -63,9 +92,7 @@ const MathHome = ({navigation}) => {
   );
 };
 
-export default MathHome;
-const cardWidth = 150;
-const cardMarginHorizontal = 20;
+export default Numbers;
 
 const styles = StyleSheet.create({
   background: {
@@ -81,19 +108,6 @@ const styles = StyleSheet.create({
   flatListContainer: {
     alignItems: 'center',
     paddingHorizontal: 20,
-  },
-  card: {
-    width: cardWidth,
-    height: 150,
-    backgroundColor: 'white',
-    padding: 20,
-    borderRadius: 10,
-    marginHorizontal: cardMarginHorizontal, // Add margin between cards
-  },
-  cardText: {
-    textAlign: 'center',
-    fontSize: 18,
-    color: 'black',
   },
   overlayImage: {
     position: 'absolute',

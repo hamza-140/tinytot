@@ -28,7 +28,7 @@ function Lesson() {
     let storageRef;
     const filePath =
       lessonType === 'video'
-        ? `lessons/${lessonCategory}/${selectedEnglishCategory}/Video/${file.name}`
+        ? `lessons/${lessonCategory}/Numbers/${lessonDetail}`
         : `lessons/${lessonCategory}/${selectedEnglishCategory}/${lessonTitle}/${lessonDetail}`;
 
     try {

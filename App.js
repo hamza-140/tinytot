@@ -33,6 +33,9 @@ import Profile from './screens/Profile';
 import PhonicsHome from './screens/English/PhonicsHome';
 import PhonicsVideo from './screens/English/PhonicsVideo';
 import PhonicsVideoList from './screens/English/PhonicsVideoList';
+import MathLessons from './screens/Math/MathLessons';
+import Numbers from './screens/Math/Numbers';
+import File from './File';
 const Stack = createNativeStackNavigator();
 
 /* 
@@ -47,7 +50,7 @@ const App = () => {
       <NavigationContainer ref={navigator => setNavigator(navigator)}>
         <StatusBar hidden={true} />
         <Stack.Navigator
-          initialRouteName="Test"
+          initialRouteName="Numbers"
           screenOptions={{headerShown: false}}>
           <Stack.Screen name="Test" component={TestScreen} />
           <Stack.Screen name="Checker" component={Checker} />
@@ -58,11 +61,14 @@ const App = () => {
           <Stack.Screen name="Main" component={MainMenu} />
           <Stack.Screen name="English" component={EnglishHome} />
           <Stack.Screen name="EnglishLessons" component={EnglishLessons} />
+          <Stack.Screen name="MathLessons" component={MathLessons} />
           <Stack.Screen name="Math" component={MathHome} />
           <Stack.Screen name="Science" component={ScienceHome} />
           <Stack.Screen name="Workbook" component={WorkbookHome} />
           <Stack.Screen name="Vocabulary" component={Vocabulary} />
           <Stack.Screen name="Alphabets" component={Alphabets} />
+          <Stack.Screen name="Numbers" component={Numbers} />
+          <Stack.Screen name="File" component={File} />
           <Stack.Screen name="Games" component={YouTubePlayer} />
           <Stack.Screen name="Trace" component={LetterTracing} />
           <Stack.Screen name="Profile" component={Profile} />
