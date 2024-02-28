@@ -13,7 +13,7 @@ import Tts from 'react-native-tts';
 import Sound from 'react-native-sound';
 import Card from '../../components/Card';
 import {firebase} from '@react-native-firebase/firestore';
-import storage from '@react-native-firebase/storage'; // Add this import for storage
+import storage from '@react-native-firebase/storage';
 
 const Numbers = ({navigation}) => {
   const [files, setFiles] = useState([]);
