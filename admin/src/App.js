@@ -18,7 +18,7 @@ import Register from './pages/Register';
 import Login from './pages/Login';
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
 
   // Your login logic here
   const handleLogin = () => {
