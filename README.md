@@ -13,4 +13,4 @@ git clone https://github.com/hamza-140/tinytot.git
 
 To start the server, run:
 
-npm start
+npm start.
