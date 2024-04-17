@@ -55,6 +55,14 @@ const MainMenu = ({navigation, route}) => {
       sound.stop();
       setSimg(require('../../assets/soundOff.png'));
       navigation.navigate('Science');
+    } else if (id == 4) {
+      sound.stop();
+      setSimg(require('../../assets/soundOff.png'));
+      navigation.navigate('Profile');
+    } else if (id == 5) {
+      sound.stop();
+      setSimg(require('../../assets/soundOff.png'));
+      navigation.navigate('Workbook');
     } else {
       sound.stop();
       setSimg(require('../../assets/soundOff.png'));
@@ -107,6 +115,7 @@ const MainMenu = ({navigation, route}) => {
     {id: '2', title: 'Math'},
     {id: '3', title: 'Science'},
     {id: '4', title: 'Profile'},
+    {id: '5', title: 'Workbook'},
   ];
 
   const renderCard = ({item}) => (

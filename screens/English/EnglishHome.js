@@ -19,9 +19,10 @@ const EnglishHome = ({navigation}) => {
     if (id == 2) {
       navigation.navigate('Games');
     }
-    if (id == 3) {
-      navigation.navigate('Trace');
+    if (id == 4) {
+      navigation.navigate('EnglishQuiz');
     }
+    
   };
   const data = [
     {id: '1', title: 'Lessons'},

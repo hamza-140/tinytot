@@ -1,18 +1,16 @@
-import React, {useEffect, useState} from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  ActivityIndicator,
-  TouchableOpacity,
-} from 'react-native';
+import React, {useContext, useEffect, useState} from 'react';
+import {View, Text, Image, StyleSheet, TouchableOpacity} from 'react-native';
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import {Context} from '../context/AuthContext';
+import { navigate } from '../ref/navigationRef';
+import { useNavigation } from '@react-navigation/native';
 
 const Profile = ({navigation}) => {
   const [kidInfo, setKidInfo] = useState(null);
   const [loading, setLoading] = useState(true);
+  const {signout} = useContext(Context);
+  // const navigation = useNavigation();
 
   useEffect(() => {
     const fetchKidInfo = async () => {
@@ -23,12 +21,11 @@ const Profile = ({navigation}) => {
             .collection('parents')
             .doc(currentUser.uid);
           const parentDoc = await parentRef.get();
-
           if (parentDoc.exists) {
             const parentData = parentDoc.data();
-            // Assuming kid info is directly stored in the parent document
             const kidInfoFromParent = parentData.kidInfo;
             if (kidInfoFromParent) {
+              console.log(kidInfoFromParent);
               setKidInfo(kidInfoFromParent);
             } else {
               console.log('Kid info not found in parent document');
@@ -49,65 +46,126 @@ const Profile = ({navigation}) => {
     fetchKidInfo();
   }, []);
 
-  return (
-    <>
-      <View style={{backgroundColor: '#D27777', padding: 20}}>
-        <TouchableOpacity
-          onPress={() => navigation.goBack()}
-          style={styles.backButton}>
-          <Icon name="backward" size={30} color="black" />
-        </TouchableOpacity>
-      </View>
+  // Dummy UserModel data
+  const dummyUser = {
+    signedInUser: {
+      image: 'https://via.placeholder.com/160', // Placeholder image URL
+      username: 'JohnDoe',
+      firstName: 'John',
+      email: 'johndoe@example.com',
+      gender: 'Male',
+    },
+  };
 
-      <View style={styles.container}>
-        {loading ? (
-          <ActivityIndicator size="large" color="#0000ff" />
-        ) : kidInfo ? (
-          <View>
-            <Text style={styles.title}>Kid Info</Text>
-            <View style={styles.inputContainer}>
-              <Text style={{color: 'black', fontWeight: 'bold'}}>
-                Name: {kidInfo.name}
-              </Text>
-            </View>
-            <View style={styles.inputContainer}>
-              <Text style={{color: 'black', fontWeight: 'bold'}}>
-                Age: {kidInfo.age}
-              </Text>
-              {/* Add more fields as needed */}
-            </View>
-          </View>
-        ) : (
-          <Text>No kid info found</Text>
-        )}
+  return (
+    <View style={styles.container}>
+      <View style={styles.header}>
+        <Text style={styles.title}>Profile</Text>
       </View>
-    </>
+      <View style={styles.content}>
+        <View style={styles.userInfo}>
+          <Image
+            source={{uri: dummyUser.signedInUser.image}}
+            style={styles.avatar}
+          />
+          <View style={styles.textContainer}>
+            <Text style={styles.label}>Name:</Text>
+            <Text style={styles.text}>{kidInfo?.name || 'N/A'}</Text>
+          </View>
+        </View>
+        <View style={styles.userInfo}>
+          <View style={styles.textContainer}>
+            <Text style={styles.label}>Age:</Text>
+            <Text style={styles.text}>{kidInfo?.age || 'N/A'}</Text>
+          </View>
+        </View>
+        <View style={styles.userInfo}>
+          <View style={styles.textContainer}>
+            <Text style={styles.label}>Gender:</Text>
+            <Text style={styles.text}>{kidInfo?.gender || 'N/A'}</Text>
+          </View>
+          <View>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => {
+              signout();
+            }}>
+            <Text style={styles.buttonText}>Logout</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => {
+              navigation.goBack(); // Navigate back to previous screen
+            }}>
+            <Text style={styles.buttonText}>Return</Text>
+          </TouchableOpacity>
+          </View>
+          
+        </View>
+      </View>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: 'purple',
+    flexDirection: 'row', // Horizontal layout
+  },
+  header: {
+    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    paddingHorizontal: 20,
-    backgroundColor: '#D27777',
+    backgroundColor: 'white',
+    borderTopRightRadius: 100,
   },
   title: {
-    color: '#fff',
-    fontSize: 36,
+    color: 'purple',
+    fontSize: 24,
     fontWeight: 'bold',
-    marginBottom: 16,
   },
-  inputContainer: {
-    padding: 10,
-    marginBottom: 16,
-    borderWidth: 1,
-    borderRadius: 8,
+  content: {
+    flex: 3,
+    backgroundColor: 'white',
+    justifyContent: 'center',
+    paddingHorizontal: 20,
+  },
+  userInfo: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 20,
+  },
+  textContainer: {
+    flex: 1,
+  },
+  avatar: {
+    width: 100,
+    height: 100,
+    borderRadius: 50,
+    marginRight: 20,
+  },
+  label: {
+    fontSize: 18,
+    marginBottom: 5,
+    color: 'purple',
+  },
+  text: {
+    fontSize: 18,
+    marginBottom: 15,
   },
   button: {
-    backgroundColor: '#42b0f4',
-    borderRadius: 8,
+    backgroundColor: 'purple',
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 5,
+    alignItems: 'center',
+    marginBottom:5,
+  },
+  buttonText: {
+    color: 'white',
+    fontSize: 18,
   },
 });
 export default Profile;

@@ -36,6 +36,7 @@ import PhonicsVideoList from './screens/English/PhonicsVideoList';
 import MathLessons from './screens/Math/MathLessons';
 import Numbers from './screens/Math/Numbers';
 import File from './File';
+import EnglishQuiz from './screens/English/EnglishQuiz';
 const Stack = createNativeStackNavigator();
 
 /* 
@@ -60,6 +61,7 @@ const App = () => {
           <Stack.Screen name="KidProfile" component={KidProfileScreen} />
           <Stack.Screen name="Main" component={MainMenu} />
           <Stack.Screen name="English" component={EnglishHome} />
+          <Stack.Screen name="EnglishQuiz" component={EnglishQuiz} />
           <Stack.Screen name="EnglishLessons" component={EnglishLessons} />
           <Stack.Screen name="MathLessons" component={MathLessons} />
           <Stack.Screen name="Math" component={MathHome} />
