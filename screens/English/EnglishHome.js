@@ -17,7 +17,7 @@ const EnglishHome = ({navigation}) => {
       navigation.navigate('EnglishLessons');
     }
     if (id == 2) {
-      navigation.navigate('Games');
+      navigation.navigate('AlphabetGame');
     }
     if (id == 4) {
       navigation.navigate('EnglishQuiz');
@@ -26,7 +26,7 @@ const EnglishHome = ({navigation}) => {
   };
   const data = [
     {id: '1', title: 'Lessons'},
-    {id: '2', title: 'Games'},
+    {id: '2', title: 'Alphabet Game'},
     {id: '3', title: 'Stories'},
     {id: '4', title: 'Quiz'},
   ];

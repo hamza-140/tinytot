@@ -1,15 +1,14 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   Text,
   TouchableOpacity,
   StyleSheet,
-  ScrollView,
   Modal,
   TouchableWithoutFeedback,
 } from 'react-native';
 import LottieView from 'lottie-react-native';
-import {useNavigation} from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 
 const EnglishQuiz = () => {
   const [selectedAnswer, setSelectedAnswer] = useState(null);
@@ -21,13 +20,13 @@ const EnglishQuiz = () => {
   const question = 'Which letter is this?';
 
   const options = [
-    {label: 'A) C', isCorrect: false},
-    {label: 'B) D', isCorrect: true},
-    {label: 'C) P', isCorrect: false},
-    {label: 'D) R', isCorrect: false},
+    { label: 'A) C', isCorrect: false },
+    { label: 'B) D', isCorrect: true },
+    { label: 'C) P', isCorrect: false },
+    { label: 'D) R', isCorrect: false },
   ];
 
-  const checkAnswer = selectedOption => {
+  const checkAnswer = (selectedOption) => {
     if (options[selectedOption].isCorrect) {
       setFeedback('Correct! Well done.');
       setShowAnimation(true);
@@ -45,29 +44,31 @@ const EnglishQuiz = () => {
   };
 
   return (
-    <ScrollView contentContainerStyle={styles.container}>
+    <View style={styles.container}>
       <Text style={styles.questionText}>{question}</Text>
 
-      {options.map((option, index) => (
-        <TouchableOpacity
-          key={index}
-          style={[
-            styles.optionButton,
-            selectedAnswer === index &&
-              (options[index].isCorrect
-                ? styles.correctOption
-                : styles.incorrectOption),
-          ]}
-          onPress={() => {
-            checkAnswer(index);
-            if (!options[index].isCorrect) {
-              setTimeout(resetQuiz, 1000); // Reset after 1 second for wrong answers
-            }
-          }}
-          disabled={selectedAnswer !== null}>
-          <Text style={styles.optionText}>{option.label}</Text>
-        </TouchableOpacity>
-      ))}
+      <View style={styles.optionsContainer}>
+        {options.map((option, index) => (
+          <TouchableOpacity
+            key={index}
+            style={[
+              styles.optionButton,
+              selectedAnswer === index &&
+                (options[index].isCorrect
+                  ? styles.correctOption
+                  : styles.incorrectOption),
+            ]}
+            onPress={() => {
+              checkAnswer(index);
+              if (!options[index].isCorrect) {
+                setTimeout(resetQuiz, 1000);
+              }
+            }}
+            disabled={selectedAnswer !== null}>
+            <Text style={styles.optionText}>{option.label}</Text>
+          </TouchableOpacity>
+        ))}
+      </View>
 
       {feedback !== '' && <Text style={styles.feedbackText}>{feedback}</Text>}
 
@@ -87,7 +88,7 @@ const EnglishQuiz = () => {
                 onAnimationFinish={() => {
                   setShowAnimation(false);
                   resetQuiz();
-                  navigation.goBack(); // Navigate back to previous screen
+                  navigation.goBack();
                 }}
               />
             </View>
@@ -100,13 +101,13 @@ const EnglishQuiz = () => {
         onPress={() => navigation.goBack()}>
         <Text style={styles.backButtonText}>Back</Text>
       </TouchableOpacity>
-    </ScrollView>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flexGrow: 1,
+    flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
     paddingVertical: 20,
@@ -116,13 +117,19 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginBottom: 20,
   },
+  optionsContainer: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
+    width: '80%',
+  },
   optionButton: {
     backgroundColor: '#e0e0e0',
     paddingHorizontal: 20,
     paddingVertical: 10,
     borderRadius: 10,
     marginVertical: 10,
-    width: '80%',
+    width: '48%', // Adjust this value to leave some space between options
     alignItems: 'center',
   },
   correctOption: {
