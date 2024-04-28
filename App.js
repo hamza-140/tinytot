@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 /* 
                                                 ============================
                                                 | IMPORTS AND DEPENDENCIES |  
@@ -39,12 +40,6 @@ import File from './File';
 import EnglishQuiz from './screens/English/EnglishQuiz';
 import AlphabetGame from './screens/English/Alphabets/AlphabetGame';
 const Stack = createNativeStackNavigator();
-
-/* 
-                                                ================
-                                                | APP FUNCTION |  
-                                                ================
-*/
 
 const App = () => {
   return (
