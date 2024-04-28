@@ -22,7 +22,6 @@ import Tracing from './screens/English/Tracing';
 import {setNavigator} from './ref/navigationRef';
 import Login from './screens/Login/Login';
 import Checker from './screens/Checker';
-import TestScreen from './TestScreen';
 import Phonics from './screens/English/Phonics';
 import Vocabulary from './screens/English/Vocabulary';
 import MathHome from './screens/Math/MathHome';
@@ -49,7 +48,6 @@ const App = () => {
         <Stack.Navigator
           initialRouteName="Checker"
           screenOptions={{headerShown: false}}>
-          <Stack.Screen name="Test" component={TestScreen} />
           <Stack.Screen name="AlphabetGame" component={AlphabetGame} />
           <Stack.Screen name="Checker" component={Checker} />
           <Stack.Screen name="Tracing" component={Tracing} />
