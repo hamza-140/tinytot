@@ -69,7 +69,7 @@ const TestScreen = () => {
 
   return (
     <ImageBackground
-      source={require('../tinytot1/assets/bg.jpg')}
+      source={require('../tinytot-master/assets/bg.jpg')}
       style={styles.background}>
       <View style={styles.container}>
         <View
