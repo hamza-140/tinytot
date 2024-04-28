@@ -40,7 +40,7 @@ const Dashboard = () => {
         {/* <DashboardHeader /> */}
         <div className="content-wrapper">
           <ul className="parent-list">
-            <h1>List of All Parents</h1>
+            <h1>List of Parents</h1>
             {parents.map(parent => (
               <li key={parent.id} className="parent-item">
                 <div
