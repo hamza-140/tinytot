@@ -75,7 +75,7 @@ function Lesson() {
               <option value="">Select Lesson Category</option>
               <option value="English">English</option>
               <option value="Math">Math</option>
-              <option value="Science">Science</option>
+              <option value="Islamic">Islamic</option>
             </select>
             {lessonCategory === 'English' && (
               <select

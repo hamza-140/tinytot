@@ -25,7 +25,6 @@ import Checker from './screens/Checker';
 import Phonics from './screens/English/Phonics';
 import Vocabulary from './screens/English/Vocabulary';
 import MathHome from './screens/Math/MathHome';
-import ScienceHome from './screens/Science/ScienceHome';
 import WorkbookHome from './screens/Workbook/WorkbookHome';
 import PhonicsLessons from './screens/English/PhonicsLessons';
 import EnglishLessons from './screens/English/EnglishLessons';
@@ -38,6 +37,7 @@ import Numbers from './screens/Math/Numbers';
 import File from './File';
 import EnglishQuiz from './screens/English/EnglishQuiz';
 import AlphabetGame from './screens/English/Alphabets/AlphabetGame';
+import IslamicHome from './screens/Islamic/IslamicHome';
 const Stack = createNativeStackNavigator();
 
 const App = () => {
@@ -60,7 +60,7 @@ const App = () => {
           <Stack.Screen name="EnglishLessons" component={EnglishLessons} />
           <Stack.Screen name="MathLessons" component={MathLessons} />
           <Stack.Screen name="Math" component={MathHome} />
-          <Stack.Screen name="Science" component={ScienceHome} />
+          <Stack.Screen name="Islamic" component={IslamicHome} />
           <Stack.Screen name="Workbook" component={WorkbookHome} />
           <Stack.Screen name="Vocabulary" component={Vocabulary} />
           <Stack.Screen name="Alphabets" component={Alphabets} />

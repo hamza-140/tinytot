@@ -1,12 +1,12 @@
 import React from 'react';
 import {View, Text} from 'react-native';
 
-const ScienceHome = () => {
+const IslamicHome = () => {
   return (
     <View>
-      <Text>Welcome to Science Home!</Text>
+      <Text>Welcome to Islamic Home!</Text>
     </View>
   );
 };
 
-export default ScienceHome;
+export default IslamicHome;

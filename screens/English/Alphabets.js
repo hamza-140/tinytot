@@ -90,6 +90,7 @@ const Alphabets = ({navigation}) => {
   };
   const renderCard = ({item}) => (
     <Card
+      status={false}
       letter={item.id}
       onPress={() => start(item.id)}
       imageSource={imageMapping[item.id.toLowerCase()]}

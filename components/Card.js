@@ -1,20 +1,20 @@
 // Card.js
 import React from 'react';
-import { View, Text, Image, TouchableOpacity } from 'react-native';
+import {View, Text, Image, TouchableOpacity} from 'react-native';
 
-const Card = ({ letter, onPress, imageSource, heading1 }) => {
+const Card = ({letter, onPress, imageSource, status, heading1}) => {
   const displayText = heading1 ? letter.toUpperCase() : letter.toUpperCase();
   const fontSize = displayText.length > 6 ? 80 : 120;
 
   return (
-    <TouchableOpacity onPress={onPress}>
+    <TouchableOpacity disabled={status} onPress={onPress}>
       <View style={styles.card}>
-        <Text style={[styles.cardText, { fontSize }]}>{displayText}</Text>
+        <Text style={[styles.cardText, {fontSize}]}>{displayText}</Text>
         {imageSource && typeof imageSource === 'number' && (
           <Image source={imageSource} style={styles.cardImage} />
         )}
         {imageSource && typeof imageSource === 'string' && (
-          <Image source={{ uri: imageSource }} style={styles.cardImage} />
+          <Image source={{uri: imageSource}} style={styles.cardImage} />
         )}
       </View>
     </TouchableOpacity>

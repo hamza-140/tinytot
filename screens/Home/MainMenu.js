@@ -54,7 +54,7 @@ const MainMenu = ({navigation, route}) => {
     } else if (id == 3) {
       sound.stop();
       setSimg(require('../../assets/soundOff.png'));
-      navigation.navigate('Science');
+      navigation.navigate('Islamic');
     } else if (id == 4) {
       sound.stop();
       setSimg(require('../../assets/soundOff.png'));
@@ -113,7 +113,7 @@ const MainMenu = ({navigation, route}) => {
   const data = [
     {id: '1', title: 'English'},
     {id: '2', title: 'Math'},
-    {id: '3', title: 'Science'},
+    {id: '3', title: 'Islamic'},
     {id: '4', title: 'Profile'},
     {id: '5', title: 'Workbook'},
   ];
