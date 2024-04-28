@@ -52,7 +52,7 @@ const App = () => {
       <NavigationContainer ref={navigator => setNavigator(navigator)}>
         <StatusBar hidden={true} />
         <Stack.Navigator
-          initialRouteName="AlphabetGame"
+          initialRouteName="Checker"
           screenOptions={{headerShown: false}}>
           <Stack.Screen name="Test" component={TestScreen} />
           <Stack.Screen name="AlphabetGame" component={AlphabetGame} />
