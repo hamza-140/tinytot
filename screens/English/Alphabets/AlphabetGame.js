@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import React, {useRef, useState} from 'react';
 import {Text, View, PanResponder, Animated, Button, Image} from 'react-native';
 
