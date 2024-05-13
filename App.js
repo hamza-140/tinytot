@@ -38,6 +38,8 @@ import File from './File';
 import EnglishQuiz from './screens/English/EnglishQuiz';
 import AlphabetGame from './screens/English/Alphabets/AlphabetGame';
 import IslamicHome from './screens/Islamic/IslamicHome';
+import EnglishLesson from './screens/English/Alphabets/EnglishLesson';
+import MathLesson from './screens/Math/MathLesson';
 const Stack = createNativeStackNavigator();
 
 const App = () => {
@@ -46,7 +48,7 @@ const App = () => {
       <NavigationContainer ref={navigator => setNavigator(navigator)}>
         <StatusBar hidden={true} />
         <Stack.Navigator
-          initialRouteName="Checker"
+          initialRouteName="MathLesson"
           screenOptions={{headerShown: false}}>
           <Stack.Screen name="AlphabetGame" component={AlphabetGame} />
           <Stack.Screen name="Checker" component={Checker} />
@@ -62,6 +64,8 @@ const App = () => {
           <Stack.Screen name="Math" component={MathHome} />
           <Stack.Screen name="Islamic" component={IslamicHome} />
           <Stack.Screen name="Workbook" component={WorkbookHome} />
+          <Stack.Screen name="EnglishLesson" component={EnglishLesson} />
+          <Stack.Screen name="MathLesson" component={MathLesson} />
           <Stack.Screen name="Vocabulary" component={Vocabulary} />
           <Stack.Screen name="Alphabets" component={Alphabets} />
           <Stack.Screen name="Numbers" component={Numbers} />

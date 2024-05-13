@@ -46,11 +46,11 @@ const MainMenu = ({navigation, route}) => {
     if (id == 1) {
       sound.stop();
       setSimg(require('../../assets/soundOff.png'));
-      navigation.navigate('English');
+      navigation.navigate('EnglishLesson');
     } else if (id == 2) {
       sound.stop();
       setSimg(require('../../assets/soundOff.png'));
-      navigation.navigate('Math');
+      navigation.navigate('MathLesson');
     } else if (id == 3) {
       sound.stop();
       setSimg(require('../../assets/soundOff.png'));
